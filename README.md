@@ -54,6 +54,12 @@ the arm can start moving.
 | assembly order | `python scripts/verify_assembly.py` | a 51-step insertion sequence with swept approach paths |
 | viewer | `python scripts/export_viewer.py` | animated three.js model → `out/viewer.html` |
 
+## Assembly
+
+**[Step-by-step assembly guide with renders → ASSEMBLY.md](ASSEMBLY.md)** —
+generated from the same collision-verified insertion sequence that
+`scripts/verify_assembly.py` checks.
+
 ## Quick start
 
 ```sh
