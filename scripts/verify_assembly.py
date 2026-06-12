@@ -22,7 +22,7 @@ from mech110.kinematics import _T
 from mech110.assembly import _rot_z
 
 PARTS_DIR = ROOT / "out" / "parts"
-meshes = {f.stem: trimesh.load(str(f), force="mesh")
+meshes = {assembly.strip_step_prefix(f.stem): trimesh.load(str(f), force="mesh")
           for f in PARTS_DIR.glob("*.stl")}
 
 P0 = assembly.poses(0.0, (0, 0, 0))

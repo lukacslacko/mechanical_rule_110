@@ -253,7 +253,9 @@ def _return_rocker() -> Part:
                 77.5, 79.0)   # tip pad; top 79.0 = flange 79.1 - witness
     # counterweight kept to the hub's x band (not 21..27) so it clears
     # the pivot ears (x 20..22.5 / 25.5..28) at every rocker angle
-    p += box_at(RR_HUB_X0, RR_HUB_X1, RR_CW_Y0, RR_CW_Y1, 73.0, 80.0)
+    # counterweight sized so CM sits BEHIND the pivot (tip biased up)
+    p += box_at(RR_HUB_X0, RR_HUB_X1, 84.5, 87.0, 72.3, 81.8)
+    p += box_at(20.5, 27.5, 87.0, 91.0, 73.0, 80.0)
     # closed bore for the separate axle pin (no C-opening)
     p -= cyl_x(y, z, RR_HUB_X0 - 3.0, RR_HUB_X1 + 4.0, 4.4)
     return p

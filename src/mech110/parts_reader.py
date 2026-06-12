@@ -197,11 +197,14 @@ def _rocker_c() -> Part:
         box_at(22.5, 25.5, 32.4, 36.7, 83.4, 84.6),      # ledge pad
         box_at(22.5, 25.5, 34.4, 35.1, 82.8, 83.6),      # contact foot rib
         box_at(22.5, 25.5, 36.5, 38.2, 82.5, 85.2),      # descender
+        # ballast: pad side must outweigh the tip side so the pad follows
+        # its pin collar down by gravity (one-way contact, no spring)
+        box_at(20.3, 27.7, 36.1, 38.4, 82.5, 90.2),
         box_at(22.5, 54.5, 37.5, 39.0, 82.5, 85.2),      # +X run
         box_at(52.0, 56.0, 38.5, 48.0, 83.0, 86.0),      # turn toward axle
         cyl_x(L.AXLE_Y, L.AXLE_Z, *L.ROCKER_HUB_C, 10.0),   # hub
-        box_at(53.0, 56.5, 50.0, 64.9, 83.0, 86.3),      # +Y run
-        box_at(53.0, 71.6, 64.2, 66.2, 83.2, 86.0),      # east arm
+        box_at(53.0, 56.5, 50.0, 64.9, 84.9, 86.3),      # +Y run (thin)
+        box_at(53.0, 71.6, 64.2, 66.2, 84.6, 86.0),      # east arm (thin)
         cyl_z(L.TIP_X, L.TIP_YS[0], 85.5, 86.6, 2.0),    # ball post
         Pos(L.TIP_X, L.TIP_YS[0], 87.45) * Sphere(1.25), # tip ball
     ]
@@ -225,6 +228,7 @@ def _rocker_r() -> Part:
         box_at(14.5, 17.5, 32.4, 36.7, 83.4, 84.6),      # ledge pad
         box_at(14.5, 17.5, 34.4, 35.1, 82.8, 83.6),      # contact foot rib
         box_at(14.5, 17.5, 36.5, 39.4, 78.6, 84.7),      # drop connector
+        box_at(12.6, 19.4, 36.1, 38.4, 82.5, 90.5),      # ballast (see C)
         box_at(14.5, 32.2, 38.2, 39.4, 78.6, 80.1),      # low strip east
         box_at(31.4, 53.0, 38.0, 43.6, 78.6, 80.1),      # diagonal under hubs
         box_at(51.5, 61.0, 42.0, 50.5, 78.6, 80.6),      # to below the hub
@@ -232,9 +236,9 @@ def _rocker_r() -> Part:
         box_at(57.0, 61.0, 44.0, 50.0, 79.0, 84.0),      # hub riser web
         box_at(57.5, 61.0, 50.0, 52.3, 76.0, 84.0),      # drop to low run
         box_at(57.5, 61.0, 52.0, 71.4, 76.0, 77.8),      # LOW +Y run
-        box_at(57.5, 61.0, 68.8, 71.4, 76.0, 86.3),      # tip riser (north
+        box_at(57.5, 59.5, 68.8, 71.4, 76.0, 86.3),      # tip riser (north
         # of the C arm band: deep-z y-shifts under rotation reach +-1.75)
-        box_at(57.5, 71.6, 67.0, 69.3, 83.2, 86.0),      # east arm
+        box_at(57.5, 71.6, 67.0, 69.3, 84.6, 86.0),      # east arm (thin)
         cyl_z(L.TIP_X, L.TIP_YS[1], 85.5, 86.6, 2.0),
         Pos(L.TIP_X, L.TIP_YS[1], 87.45) * Sphere(1.25),
     ]

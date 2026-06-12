@@ -15,7 +15,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 t0 = time.time()
 parts = assembly.build_all(bits=(0, 0, 0))
 for name, solid in sorted(parts.items()):
-    path = OUT / f"{name}.stl"
+    path = OUT / f"{assembly.stl_name(name)}.stl"
     export_stl(solid, str(path), tolerance=0.03, angular_tolerance=0.25)
     ns = len(solid.solids())
     tag = "" if ns == 1 else f"  [WARN {ns} solids]"
@@ -25,7 +25,7 @@ for name, solid in sorted(parts.items()):
 from mech110 import parts_frame
 for bits in itertools.product((0, 1), repeat=3):
     t = parts_frame.build(bits=bits)["tape_a"]
-    export_stl(t, str(OUT / f"tape_a_{bits[0]}{bits[1]}{bits[2]}.stl"),
+    export_stl(t, str(OUT / ("04_tape_a_%d%d%d.stl" % bits)),
                tolerance=0.03, angular_tolerance=0.25)
     print(f"tape_a_{bits[0]}{bits[1]}{bits[2]} ok")
 

@@ -34,7 +34,8 @@ def load_clean(path):
     m.remove_unreferenced_vertices()
     return m
 
-meshes = {f.stem: load_clean(f) for f in PARTS_DIR.glob("*.stl")}
+meshes = {assembly.strip_step_prefix(f.stem): load_clean(f)
+          for f in PARTS_DIR.glob("*.stl")}
 print(f"loaded {len(meshes)} meshes")
 
 def stl_key(n):

@@ -19,6 +19,14 @@
 - out/parts/*.stl: all printable parts, single solids, watertight after
   vertex merge.
 
+## Statics (added after session 1)
+- Force-closure was NOT covered by the geometric sweeps: all three rockers
+  were tip-heavy as built (pads would not follow the pins; punch not
+  supported). Fixed with pad-side ballast blocks / a larger counterweight;
+  locked in by tests/test_mass_balance.py (CenterOf.MASS moment margins).
+- STL filenames now carry their assembly-step prefix (NN_name.stl);
+  loaders strip it via assembly.strip_step_prefix().
+
 ## NEXT
 1. Boolean-classify the 8 assembly residuals (reuse verify_motion's bvol).
 2. Re-run verify_assembly after the spoked-hub boss removal.

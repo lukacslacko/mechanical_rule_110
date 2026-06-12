@@ -49,17 +49,18 @@ def mesh_entry(m, color):
 def main():
     parts = {}
     for f in sorted(PARTS_DIR.glob("*.stl")):
-        if f.stem.startswith("tape_a_"):
+        stem = assembly.strip_step_prefix(f.stem)
+        if stem.startswith("tape_a_"):
             continue
         m = trimesh.load(str(f), force="mesh")
-        base = f.stem
+        base = stem
         key = ("pin" if base == "pin" else
                "collar" if base == "collar" else base)
         parts[base] = mesh_entry(m, COLORS.get(key, COLORS.get(
             base.rstrip("_lcr").rstrip("_"), "#cccccc")))
     tapes_a = {}
     for bits in itertools.product((0, 1), repeat=3):
-        f = PARTS_DIR / f"tape_a_{bits[0]}{bits[1]}{bits[2]}.stl"
+        f = PARTS_DIR / ("04_tape_a_%d%d%d.stl" % bits)
         m = trimesh.load(str(f), force="mesh")
         tapes_a["".join(map(str, bits))] = mesh_entry(m, COLORS["tape_a"])
 

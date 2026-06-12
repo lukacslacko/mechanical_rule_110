@@ -188,6 +188,38 @@ def pose_of(name: str, theta: float, bits=(0, 0, 0),
     return p.get(name, I4)
 
 
+# assembly-step prefix for exported STL filenames (see ASSEMBLY.md)
+ASSEMBLY_ORDER = {
+    "base": 1, "plate_left": 2, "plate_right": 2, "bed": 3,
+    "tape_a": 4, "tape_b": 4, "cover_a": 5, "cover_b": 5,
+    "comb_bridge": 6, "pin_l": 7, "pin_c": 7, "pin_r": 7, "bail": 8,
+    "collar_l": 9, "collar_c": 9, "collar_r": 9, "punch_block": 10,
+    "lcol_left": 11, "lcol_right": 11, "rocker_c": 12, "rocker_r": 12,
+    "axle": 13, "and3": 14, "gallows": 15, "swing_arm": 16, "block": 16,
+    "pivot_clip": 18, "return_rocker": 19, "rr_axle": 20,
+    "hammer": 21, "data_punch": 21, "gp_slider": 22, "camshaft": 23,
+    "key_bail": 24, "key_gp": 24, "key_ham": 24, "sprocket_shaft": 25,
+    "cap_spk_left": 26, "cap_spk_right": 26,
+    "cp_sl1": 26, "cp_sl2": 26, "cp_sr1": 26, "cp_sr2": 26,
+    "geneva_wheel": 27, "spk_clip": 28,
+    "cap_cam_left": 29, "cap_cam_right": 29,
+    "cp_cl1": 29, "cp_cl2": 29, "cp_cr1": 29, "cp_cr2": 29,
+    "crank": 30,
+}
+
+
+def stl_name(name: str) -> str:
+    base = name.split("_")[0] if name.startswith("tape_a_") else name
+    step = ASSEMBLY_ORDER.get("tape_a" if name.startswith("tape_a_")
+                              else name, 0)
+    return f"{step:02d}_{name}"
+
+
+def strip_step_prefix(stem: str) -> str:
+    import re
+    return re.sub(r"^\d{2}_", "", stem)
+
+
 # pairs that intentionally touch/pierce; (allowed penetration mm)
 WHITELIST = {
     frozenset(("gp_slider", "tape_b")): 99.0,      # punches paper
